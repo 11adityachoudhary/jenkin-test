@@ -10,8 +10,8 @@ pipeline {
                 script {
                     //withCredentials([string(credentialsId: 'docker-username', variable: 'username'), string(credentialsId: 'docker-hub-password', variable: 'password')]) {
                     //}
-                        sh 'docker login -u 11adityachoudhary -p Aditya@11docker'
-                        sh 'docker build -t test/$CONTAINER_NAME:latest .'
+                        sh 'sudo docker login -u 11adityachoudhary -p Aditya@11docker'
+                        sh 'sudo docker build -t test/$CONTAINER_NAME:latest .'
                     
                 }
             }
