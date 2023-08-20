@@ -1,60 +1,34 @@
 pipeline {
-    environment{
-    CONTAINER_NAME = "hello-world"
-}   
-    agent any
-
+    agent any 
+    environment {
+        //once you sign up for Docker hub, use that user_id here
+        dockerImage = ''
+        registry = "11adityachoudhary/node-app"
+        //- update your credentials ID after creating credentials for connecting to Docker Hub
+        registryCredential = 'docker_id'
+    }
+    
     stages {
-        stage('Build & Test') {
-            steps {
-                script {
-                    //withCredentials([string(credentialsId: 'docker-username', variable: 'username'), string(credentialsId: 'docker-hub-password', variable: 'password')]) {
-                    //}
-                        sh 'sudo docker login -u 11adityachoudhary -p Aditya@11docker'
-                        sh 'sudo docker build -t test/$CONTAINER_NAME:latest .'
-                    
-                }
-            }
-        }/*
-        stage('Push') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh 'docker push $USERNAME/$CONTAINER_NAME:latest'
-                    }
-                }
-            }
-        }
         
-      // This stage attempts to stop a Docker container with the name '$CONTAINER_NAME' to avoid conflicts when trying to run containers on the same port.
-       stage('stop container') {
-            steps {
-                script {
-              sh '''#!/bin/bash
-                    containerName=$(docker ps -a --format '{{.Names}}' | grep -w "$CONTAINER_NAME")
-
-                    echo "Container Names: $containerName"
-
-                    if [ ! -z "$containerName" ]; then
-                        docker stop "$containerName"
-                        docker rename "$containerName" "$CONTAINER_NAME$BUILD_NUMBER"
-                    else 
-                        echo 'Container does not exist'    
-                    fi
-                 '''
-                }
+    
+    // Building Docker images
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry
+        }
+      }
+    }
+    
+     // Uploading Docker images into Docker Hub
+    stage('Upload Image') {
+     steps{    
+         script {
+            docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
             }
         }
-  
-
-        stage('Deploy') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh 'docker run -d -p 3000:3000 --name $CONTAINER_NAME $USERNAME/$CONTAINER_NAME:latest'
-                    }
-            }
-        }
-     }*/
-   }
+      }
+    }
+    }
 }
