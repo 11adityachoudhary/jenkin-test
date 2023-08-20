@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        //once you sign up for Docker hub, use that user_id here
+        //once you sign up for Docker hub, use that user_id ere
         dockerImage = ''
         registry = "11adityachoudhary/node-app"
         //- update your credentials ID after creating credentials for connecting to Docker Hub
