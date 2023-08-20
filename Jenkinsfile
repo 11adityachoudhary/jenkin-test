@@ -9,8 +9,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'docker-username', variable: 'username'), string(credentialsId: 'docker-hub-password', variable: 'password')]) {
-                        sh 'docker login -u $username -p $password'
-                        sh 'docker build -t $username/$CONTAINER_NAME:latest .'
+                        sh 'sudo docker login -u $username -p $password'
+                        sh 'sudo docker build -t $username/$CONTAINER_NAME:latest .'
                     }
                 }
             }
