@@ -19,7 +19,6 @@ pipeline {
         }
       }
     }
-    
      // Uploading Docker images into Docker Hub
     stage('Upload Image') {
      steps{    
@@ -30,6 +29,18 @@ pipeline {
         }
       }
     }
+   stage('Stop and Remove Existing Container') {
+        steps {
+            script {
+                    // Define the name of the existing container to stop and remove
+                    def existingContainerName = registry
+
+                    // Stop and remove the existing container
+                    sh "docker stop $existingContainerName || true"
+                    sh "docker rm $existingContainerName || true"
+            }
+        }
+    }    
     stage('Docker Run') {
        steps{
          script {
