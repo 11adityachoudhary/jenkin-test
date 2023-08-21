@@ -30,5 +30,12 @@ pipeline {
         }
       }
     }
+    stage('Docker Run') {
+       steps{
+         script {
+                sh 'docker run -d -p 3000:3000 --name node-container ' + registry 
+            }
+         }
+      }    
     }
 }
