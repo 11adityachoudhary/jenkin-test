@@ -33,7 +33,7 @@ pipeline {
         steps {
             script {
                     // Define the name of the existing container to stop and remove
-                    def existingContainerName = registry
+                    def existingContainerName = 'node-container'
 
                     // Stop and remove the existing container
                     sh "docker stop $existingContainerName || true"
