@@ -11,7 +11,7 @@ describe("App", () => {
             .get("/")
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                expect(res.text).to.equal("Hello, World!");
+                expect(res.text).to.equal("Hello World, this is second run!!");
                 done();
             }); 
     });
