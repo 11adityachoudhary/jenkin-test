@@ -47,8 +47,9 @@ pipeline {
        steps{
          script {
                 sh 'docker run -d -p 3000:3000 --name node-container-1 ' + registry 
+                sh 'docker exec node-container-1 hostname-i'
                 sh 'docker run -d -p 3001:3000 --name node-container-2 ' + registry
-                sh "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' ${docker ps -a -q}"
+                sh 'docker exec node-container-2 hostname-i'
             }
          }
       }    
