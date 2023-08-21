@@ -13,6 +13,6 @@ RUN chown -R node:node /app
 USER node
 ##EXPOSE 3000
 # Add a health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD \
-curl http://localhost:3000/health || exit 1
+#HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 CMD \
+#curl http://localhost:3000/health || exit 1
 
