@@ -3,7 +3,7 @@ pipeline {
     environment {
         //once you sign up for Docker hub, use that user_id here
         dockerImage = ''
-        registry = "11adityachoudhary/node-app"
+        registry = "11adityachoudhary/node_app"
         //- update your credentials ID after creating credentials for connecting to Docker Hub
         registryCredential = 'docker_id'
     }
