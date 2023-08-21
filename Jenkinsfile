@@ -36,10 +36,10 @@ pipeline {
                     def existingContainerName = 'node-container'
 
                     // Stop and remove the existing container
-                    sh "docker stop $existingContainerName || true"
-                    sh "docker rm $existingContainerName || true"
-                    //sh "docker stop $existingContainerName-2 || true"
-                    //sh "docker rm $existingContainerName-2 || true"
+                    sh "docker stop $existingContainerName-1 || true"
+                    sh "docker rm $existingContainerName-1 || true"
+                    sh "docker stop $existingContainerName-2 || true"
+                    sh "docker rm $existingContainerName-2 || true"
             }
         }
     }    
